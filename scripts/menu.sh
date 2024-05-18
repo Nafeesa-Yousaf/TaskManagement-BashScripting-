@@ -4,7 +4,7 @@
 LIGHT_GREEN='\033[1;32m'
 NO_COLOR='\033[0m'
 
-SCRIPT_PATH='/home/nafeesa-yousaf/Documents/OsProject/scripts/';
+SCRIPT_PATH='./';
 # Function to display the main menu
 function main_menu {
     clear
@@ -23,7 +23,7 @@ function main_menu {
     case $choice in
         1) bash  "$SCRIPT_PATH"createTask.sh;;
         2) bash  "$SCRIPT_PATH"displayAllTasks.sh ;;
-        3) edit_task ;;
+        3) bash  "$SCRIPT_PATH"updateTask.sh  ;;
         4) delete_task ;;
         5) search_task ;;
         6) logout ;;
