@@ -4,7 +4,8 @@
 LIGHT_GREEN='\033[1;32m'
 NO_COLOR='\033[0m'
 
-SCRIPT_PATH='/home/nafeesa-yousaf/Documents/OsProject/scripts/';
+SCRIPT_PATH='./';
+
 # Function to display the main menu
 function main_menu {
     clear
