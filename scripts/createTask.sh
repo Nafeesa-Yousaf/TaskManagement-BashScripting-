@@ -17,6 +17,11 @@ function generate_id {
 
 # Function to add a new task
 function add_task {
+    clear
+    echo "---------------------------------------"
+    echo -e "${LIGHT_GREEN}           Create New Task          ${NO_COLOR}"
+    echo "---------------------------------------"
+    echo ""
     echo -n "Enter task name: "
     read task_name
     echo -n "Enter task description: "
@@ -32,6 +37,8 @@ function add_task {
     echo "$task_name,$task_desc,$task_date,$task_priority,Not Started,$(generate_id)" >> "$DATA_FILES"
     echo -e "${LIGHT_GREEN}Task added successfully!${NO_COLOR}"
     fi
+    sleep 1 
+    bash  "$SCRIPT_PATH"menu.sh;
 }
 
 add_task
