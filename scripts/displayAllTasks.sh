@@ -12,7 +12,7 @@ TASK_FILE="$HOME/Documents/OsProject/dataFiles/Tasks.txt";
 # Function to show all tasks
 function show_tasks {
     if [ -s $TASK_FILE ]; then
-        echo "Name,Description,DUE DATE, PRIORITY, Status, Unique ID"
+        echo "Name,Description,DUE DATE, PRIORITY, Status"
         awk -F, '{print $1","$2","$3","$4","$5}' $TASK_FILE
     else
         echo "No tasks Added."
