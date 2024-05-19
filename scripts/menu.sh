@@ -3,8 +3,22 @@
 # Define colors
 LIGHT_GREEN='\033[1;32m'
 NO_COLOR='\033[0m'
+BLUE='\033[0;34m'
 
 SCRIPT_PATH='./';
+
+function logout {
+    echo ""
+    echo -n -e "${BLUE}Are you sure you want to logout? (y/n): ${NO_COLOR}"
+    read confirm
+    if [[ $confirm == [yY] ]]; then
+        echo "Logging out..."
+        exit 0
+    else
+        main_menu
+    fi
+}
+
 # Function to display the main menu
 function main_menu {
     clear
@@ -22,10 +36,10 @@ function main_menu {
     read choice
     case $choice in
         1) bash  "$SCRIPT_PATH"createTask.sh;;
-        2) bash  "$SCRIPT_PATH"displayAllTasks.sh ;;
-        3) bash  "$SCRIPT_PATH"updateTask.sh  ;;
-        4) bash  "$SCRIPT_PATH"deleteTask.sh ;;
-        5) bash  "$SCRIPT_PATH"searchTask.sh ;;
+        2) bash  "$SCRIPT_PATH"displayAllTasks.sh;;
+        3) bash  "$SCRIPT_PATH"updateTask.sh;;
+        4) bash  "$SCRIPT_PATH"deleteTask.sh;;
+        5) bash  "$SCRIPT_PATH"searchTask.sh;;
         6) logout ;;
         *) echo "Invalid option. Try again."; main_menu ;;
     esac

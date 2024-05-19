@@ -86,6 +86,11 @@ source ./sendMail.sh
 
 # Function to add a new task
 function add_task {
+    clear
+    echo "---------------------------------------"
+    echo -e "${LIGHT_GREEN}           Create New Task          ${NO_COLOR}"
+    echo "---------------------------------------"
+    echo ""
     echo -n "Enter task name: "
     read task_name
 
@@ -144,6 +149,7 @@ Status: Not Started"
 
     # Show success message
     echo -e "${LIGHT_GREEN}Task added successfully!${NO_COLOR}"
+ech0 ""
 	echo "Enter any Key to Continue..."
 	read -n 1
     # Return to the main menu (assuming menu.sh exists)
