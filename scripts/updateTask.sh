@@ -5,6 +5,12 @@ BASE_DIR="./users"
 
 # Define colors
 LIGHT_GREEN='\033[1;32m'
+BLUE='\033[0;34m'
+RED='\033[31m'
+YELLOW='\033[33m'
+MAGENTA='\033[35m'
+CYAN='\033[36m'
+GREY='\033[90m'
 NO_COLOR='\033[0m'
 
 TASK_FILE="$HOME/Documents/OsProject/dataFiles/Tasks.txt"
@@ -16,7 +22,7 @@ function validate_date {
 
     # Check if the date matches the regex pattern
     if [[ ! $1 =~ $date_regex ]]; then
-        echo "Invalid date format. Please enter a date in YYYY-MM-DD format."
+        echo -e "${RED}Invalid date format. Please enter a date in YYYY-MM-DD format.${NO_COLOR}"
         return 1
     fi
 
@@ -27,7 +33,8 @@ function validate_date {
 
     # Validate month (should be between 01 and 12)
     if (( $month < 1 || $month > 12 )); then
-        echo "Invalid month. Month must be between 01 and 12."
+        echo -e "${RED}Invalid month. Month must be between 01 and 12.${NO_COLOR}"
+        echo ""
         return 1
     fi
 
@@ -47,13 +54,15 @@ function validate_date {
 
     # Check if the day is within the valid range
     if (( $day < 1 || $day > $max_days )); then
-        echo "Invalid day for the given month. Day must be between 01 and $max_days."
+        echo -e "${RED}Invalid day for the given month. Day must be between 01 and $max_days.${NO_COLOR}"
+        echo ""
         return 1
     fi
 
     # Check if the date is not less than today
     if [[ $1 < "$(date +%Y-%m-%d)" ]]; then
-        echo "Invalid date. Date must be today or in the future."
+        echo -e "${RED}Invalid date. Date must be today or in the future.${NO_COLOR}"
+        echo ""
         return 1
     fi
 
@@ -81,36 +90,55 @@ source ./sendMail.sh
 
 # Function to show all tasks
 function update_task {
+    clear
+    echo -e "${GREY}     ---------------------------------------${NO_COLOR}"
+    echo -e "     ${LIGHT_GREEN}               Edit Tasks                ${NO_COLOR}"
+    echo -e "${GREY}     ---------------------------------------${NO_COLOR}"
+    echo ""
     if [ -s $TASK_FILE ]; then
-        echo "Name,Description,DUE DATE, PRIORITY, Status, Unique ID"
-        awk -F, '{print $1","$2","$3","$4","$5","$6}' $TASK_FILE
-
-        echo -n "Enter Task ID you want to update: "
+        # Print the header with colors
+        echo -e "${LIGHT_GREEN}ID${NO_COLOR}          |${LIGHT_GREEN}Name${NO_COLOR}                 |${LIGHT_GREEN}Description${NO_COLOR}                     |${LIGHT_GREEN}DUE DATE${NO_COLOR}    |${LIGHT_GREEN}PRIORITY${NO_COLOR}    |${LIGHT_GREEN}Status${NO_COLOR}"
+        echo -e "${GREY}------------+--------------------+--------------------------------+------------+------------+----------${NO_COLOR}"
+        
+        # Use awk to print the task data
+        awk -F, '{printf "%-10s | %-20s | %-30s | %-10s | %-10s | %-10s\n", $6, $1, $2, $3, $4, $5}' $TASK_FILE
+    else
+        echo -e "${RED}No tasks here!${NO_COLOR}"
+    fi
+        echo ""
+        echo -n -e "${YELLOW}Enter Task ID you want to update:${NO_COLOR} "
         read id
-
         # Check if the ID exists
         if grep -q ",$id\$" $TASK_FILE; then
             # Read the current details of the task
             current_task=$(grep ",$id\$" $TASK_FILE)
             IFS=, read -r task_name task_desc task_date task_priority task_status task_id <<< "$current_task"
 
-            echo "Current task details:"
-            echo "Name: $task_name"
-            echo "Description: $task_desc"
-            echo "Due Date: $task_date"
-            echo "Priority: $task_priority"
-            echo "Status: $task_status"
-            echo "Unique ID: $task_id"
+            echo ""
+            echo -e "--- ${YELLOW}Current task details${NO_COLOR} ---"
+            echo "----------------------------"
+            echo -e "Name: $task_name"
+            echo -e "Description: $task_desc"
+            echo -e "Due Date: $task_date"
+            echo -e "Priority: $task_priority"
+            echo -e "Status: $task_status"
+            echo -e "Unique ID: $task_id"
+            echo "----------------------------"
+            echo ""
 
             # Get new task details from the user
-            echo -n "Enter new task name (leave blank to keep current): "
+            echo -e "--- ${YELLOW}Enter New task details${NO_COLOR} ---"
+            echo "------------------------------------"
+            echo -n -e "${YELLOW}Enter new task name (leave blank to keep current):${NO_COLOR} "
             read new_task_name
-            echo -n "Enter new task description (leave blank to keep current): "
+            echo ""
+            echo -n -e "${YELLOW}Enter new task description (leave blank to keep current):${NO_COLOR} "
             read new_task_desc
+            echo ""
 
             # Validate date
             while true; do
-                echo -n "Enter new due date (YYYY-MM-DD) (leave blank to keep current): "
+                echo -n -e "${YELLOW}Enter new due date (YYYY-MM-DD) (leave blank to keep current):${NO_COLOR} "
                 read new_task_date
                 if [[ -z "$new_task_date" ]] || validate_date "$new_task_date"; then
                     break
@@ -121,23 +149,24 @@ function update_task {
 
             # Validate priority
             while true; do
-                echo -n "Enter new priority (High, Medium, Low) (leave blank to keep current): "
+                echo -n -e "${YELLOW}Enter new priority (High, Medium, Low) (leave blank to keep current):${NO_COLOR} "
                 read new_task_priority
+                echo ""
                 if [[ -z "$new_task_priority" ]] || validate_priority "$new_task_priority"; then
                     break
                 else
-                    echo "Invalid priority. Please enter High, Medium, or Low."
+                    echo -e "${RED}Invalid priority. Please enter High, Medium, or Low.${NO_COLOR}"
                 fi
             done
 
             # Validate status
             while true; do
-                echo -n "Enter new status (Not Started, In Progress, Done) (leave blank to keep current): "
+                echo -n -e "${YELLOW}Enter new status (Not Started, In Progress, Done) (leave blank to keep current):${NO_COLOR} "
                 read new_task_status
                 if [[ -z "$new_task_status" ]] || validate_status "$new_task_status"; then
                     break
                 else
-                    echo "Invalid status. Please enter Not Started, In Progress, or Done."
+                    echo -e "${RED}Invalid status. Please enter Not Started, In Progress, or Done.${NO_COLOR}"
                 fi
             done
 
@@ -164,13 +193,12 @@ Status: $new_task_status"
 
 
             echo -e "${LIGHT_GREEN}Task updated successfully!${NO_COLOR}"
+            echo ""
         else
-            echo "Task ID not found."
+            echo -e "${RED}Task ID not found.${NO_COLOR}"
+            echo ""
         fi
-    else
-        echo "No tasks added."
-    fi
-    echo -n "Press any key to return to the main menu..."
+    echo -n -e "${BLUE}Press any key to return to the main menu...${NO_COLOR}"
     read -n 1
     bash  ./menu.sh
 }

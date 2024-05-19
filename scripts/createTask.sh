@@ -5,6 +5,12 @@ BASE_DIR="./users"
 
 # Define colors
 LIGHT_GREEN='\033[1;32m'
+BLUE='\033[0;34m'
+RED='\033[31m'
+YELLOW='\033[33m'
+MAGENTA='\033[35m'
+CYAN='\033[36m'
+GREY='\033[90m'
 NO_COLOR='\033[0m'
 
 # Path to the data file (use $HOME instead of ~ for proper expansion)
@@ -27,7 +33,7 @@ function validate_date {
 
     # Check if the date matches the regex pattern
     if [[ ! $1 =~ $date_regex ]]; then
-        echo "Invalid date format. Please enter a date in YYYY-MM-DD format."
+        echo -e "${RED}Invalid date format. Please enter a date in YYYY-MM-DD format.${NO_COLOR}"
         return 1
     fi
 
@@ -38,7 +44,7 @@ function validate_date {
 
     # Validate month (should be between 01 and 12)
     if (( $month < 1 || $month > 12 )); then
-        echo "Invalid month. Month must be between 01 and 12."
+        echo -e "${RED}Invalid month. Month must be between 01 and 12.${NO_COLOR}"
         return 1
     fi
 
@@ -58,13 +64,13 @@ function validate_date {
 
     # Check if the day is within the valid range
     if (( $day < 1 || $day > $max_days )); then
-        echo "Invalid day for the given month. Day must be between 01 and $max_days."
+        echo -e "${RED}Invalid day for the given month. Day must be between 01 and $max_days.${NO_COLOR}"
         return 1
     fi
 
     # Check if the date is not less than today
     if [[ $1 < "$(date +%Y-%m-%d)" ]]; then
-        echo "Invalid date. Date must be today or in the future."
+        echo -e "${RED}Invalid date. Date must be today or in the future.${NO_COLOR}"
         return 1
     fi
 
@@ -87,27 +93,30 @@ source ./sendMail.sh
 # Function to add a new task
 function add_task {
     clear
-    echo "---------------------------------------"
-    echo -e "${LIGHT_GREEN}           Create New Task          ${NO_COLOR}"
-    echo "---------------------------------------"
+    echo -e "${GREY}     ---------------------------------------${NO_COLOR}"
+    echo -e "     ${LIGHT_GREEN}             Create Tasks              ${NO_COLOR}"
+    echo -e "${GREY}     ---------------------------------------${NO_COLOR}"
     echo ""
-    echo -n "Enter task name: "
+    echo -n -e "${YELLOW}Enter task namcde:${NO_COLOR} "
     read task_name
+    echo ""
 
     # Check if the task name is empty
     if [ -z "$task_name" ]; then
-        echo "Task name cannot be empty. Task not added."
+        echo -e "${RED}Task name cannot be empty. Task not added.${NO_COLOR}"
         return
     fi
 
-    echo -n "Enter task description: "
+    echo -n -e "${YELLOW}Enter task description:${NO_COLOR} "
     read task_desc
+    echo ""
 
     # Validate due date
     while true; do
-        echo -n "Enter Due Date (YYYY-MM-DD): "
+        echo -n -e "${YELLOW}Enter Due Date (YYYY-MM-DD):${NO_COLOR} "
         read task_date
         if validate_date "$task_date"; then
+        echo ""
             break
         else
             echo ""
@@ -116,12 +125,14 @@ function add_task {
 
     # Validate priority
     while true; do
-        echo -n "Enter Priority (High, Medium, Low): "
+        echo -n -e "${YELLOW}Enter Priority (High, Medium, Low):${NO_COLOR} "
         read task_priority
+        echo ""
         if validate_priority "$task_priority"; then
             break
         else
-            echo "Invalid priority. Please enter High, Medium, or Low."
+            echo -e "${RED}Invalid priority. Please enter High, Medium, or Low.${NO_COLOR}"
+            echo ""
         fi
     done
 
@@ -149,8 +160,8 @@ Status: Not Started"
 
     # Show success message
     echo -e "${LIGHT_GREEN}Task added successfully!${NO_COLOR}"
-ech0 ""
-	echo "Enter any Key to Continue..."
+    echo ""
+	echo -e "${BLUE}Enter any Key to Continue...${NO_COLOR}"
 	read -n 1
     # Return to the main menu (assuming menu.sh exists)
     bash ./menu.sh
