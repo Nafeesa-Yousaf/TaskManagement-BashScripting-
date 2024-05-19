@@ -132,7 +132,9 @@ function add_task {
     echo "$task_name,$task_desc,$task_date,$task_priority,Not Started,$(generate_next_id)" >> "$DATA_FILES"
 	
     #Multi Line Email Message
-    multi_line_message="Task Name: $task_name
+    multi_line_message="
+New Task Added with ID $(generate_next_id). Task Details are:
+Task Name: $task_name
 Description: $task_desc
 Due Date: $task_date
 Priority: $task_priority
