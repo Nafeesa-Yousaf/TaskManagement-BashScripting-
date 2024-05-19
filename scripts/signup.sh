@@ -73,7 +73,7 @@ function signup {
         echo "$username,$email,$password" >> "$HOME/Documents/OsProject/dataFiles/UserCredentials/userDetails.txt"
 
         # Create a tasks file for the user
-        touch "$HOME/Documents/OsProject/dataFiles/Tasks/$username\_Tasks.txt"
+        touch "$HOME/Documents/OsProject/dataFiles/Tasks/"$username"_Tasks.txt"
 	#Multi Line Email Message
     multi_line_message="
 Your Account is Created Successfully"
