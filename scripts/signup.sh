@@ -2,6 +2,16 @@
 
 source sendMail.sh
 
+# Define colors
+LIGHT_GREEN='\033[1;32m'
+BLUE='\033[0;34m'
+RED='\033[31m'
+YELLOW='\033[33m'
+MAGENTA='\033[35m'
+CYAN='\033[36m'
+GREY='\033[90m'
+NO_COLOR='\033[0m'
+
 # Function to check if a username already exists
 function is_username_exist {
     local username="$1"
@@ -21,15 +31,24 @@ function signup {
     while true; do
         # Validate and prompt for username
         while true; do
+        echo "    ---------------------------------------"
+        echo -e "${LIGHT_GREEN}           Task Management System          ${NO_COLOR}"
+        echo "    ---------------------------------------"
+        echo ""
+        echo -e "${GREY}     ---------------------------------------${NO_COLOR}"
+    echo -e "${LIGHT_GREEN}        Welcome to the Signup system!             ${NO_COLOR}"
+    echo -e "${GREY}     ---------------------------------------${NO_COLOR}"
+    echo ""
             echo -n "Enter username (no spaces allowed): "
             read username
             if [[ -z "$username" || "$username" == *" "* ]]; then
-                echo "Invalid username. Username cannot be empty or contain spaces."
+                echo -e "${RED}Invalid username. Username cannot be empty or contain spaces.${NO_COLOR}"
             elif is_username_exist "$username"; then
-                echo "Username already exists."
+                echo -e "${RED}Username already exists.${NO_COLOR}"
+                echo ""
                 read -p "Do you want to retry with a different username? (y/n): " retry_choice
                 if [[ "$retry_choice" == "n" ]]; then
-                    echo "Press Any key to exit: "
+                    echo -e "${BLUE}Press Any key to exit:${NO_COLOR} "
                     read -n 1
                     bash ./menu.sh
                 fi
@@ -43,12 +62,14 @@ function signup {
             echo -n "Enter email address: "
             read email
             if [[ ! "$email" =~ ^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$ ]]; then
-                echo "Invalid email address. Please enter a valid email."
+                echo -e "${RED}Invalid email address. Please enter a valid email.${NO_COLOR}"
+                echo ""
             elif is_email_exist "$email"; then
-                echo "Email already exists."
+                echo -e "${RED}Email already exists.${NO_COLOR}"
+                echo ""
                 read -p "Do you want to retry with a different email? (y/n): " retry_choice
                 if [[ "$retry_choice" == "n" ]]; then
-                    echo "Press Any key to exit: "
+                    echo -e "${BLUE}Press Any key to exit:${NO_COLOR} "
                     read -n 1
                     bash ./menu.sh
                 fi
@@ -63,7 +84,8 @@ function signup {
             read -s password
             echo
             if (( ${#password} < 4 )); then
-                echo "Password must be at least 4 characters long."
+                echo -e "${RED}Password must be at least 4 characters long.${NO_COLOR}"
+                echo ""
             else
                 break
             fi
@@ -79,11 +101,11 @@ function signup {
 Your Account is Created Successfully"
     # Send email notification
     #send_email "$email" "Account Created Sucessfully" "$multi_line_message"
-        echo "User signed up successfully."
-
-        echo "Press Any key to Continue: "
-        read -n 1
-        bash ./menu.sh
+        echo -e "${LIGHT_GREEN}User signed up successfully.${NO_COLOR}"
+        echo ""
+        echo -e "${BLUE}Press Any key to Continue:${NO_COLOR} "
+        read -n 
+        bash ./login.sh
     done
 }
 
