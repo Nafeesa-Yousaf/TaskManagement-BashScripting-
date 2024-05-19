@@ -23,10 +23,10 @@ function main_menu {
     read choice
     case $choice in
         1) bash  "$SCRIPT_PATH"createTask.sh;;
-        2) bash  "$SCRIPT_PATH"displayAllTasks.sh ;;
-        3) bash  "$SCRIPT_PATH"updateTask.sh  ;;
-        4) delete_task ;;
-        5) search_task ;;
+        2) bash  "$SCRIPT_PATH"displayAllTasks.sh;;
+        3) bash  "$SCRIPT_PATH"updateTask.sh;;
+        4) bash  "$SCRIPT_PATH"deleteTask.sh;;
+        5) bash  "$SCRIPT_PATH"searchTask.sh;;
         6) logout ;;
         *) echo "Invalid option. Try again."; main_menu ;;
     esac
