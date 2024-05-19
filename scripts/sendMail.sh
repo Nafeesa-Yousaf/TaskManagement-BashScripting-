@@ -21,6 +21,4 @@ EOF
     fi
 }
 
-# Example usage of the function
-#send_email "nafeesayousaf2129@gmail.com" "Test Subject" "This is a test message."
 
