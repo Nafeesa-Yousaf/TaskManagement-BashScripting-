@@ -3,8 +3,21 @@
 # Define colors
 LIGHT_GREEN='\033[1;32m'
 NO_COLOR='\033[0m'
+BLUE='\033[0;34m'
 
 SCRIPT_PATH='./';
+
+function logout {
+    echo ""
+    echo -n -e "${BLUE}Are you sure you want to logout? (y/n): ${NO_COLOR}"
+    read confirm
+    if [[ $confirm == [yY] ]]; then
+        echo "Logging out..."
+        exit 0
+    else
+        main_menu
+    fi
+}
 
 # Function to display the main menu
 function main_menu {
