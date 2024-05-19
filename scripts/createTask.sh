@@ -33,6 +33,9 @@ function validate_priority {
     esac
 }
 
+# Source the email sender script
+source ./sendMail.sh
+
 # Function to add a new task
 function add_task {
     echo -n "Enter task name: "
@@ -79,8 +82,19 @@ function add_task {
 
     # Append the task to the file
     echo "$task_name,$task_desc,$task_date,$task_priority,Not Started,$(generate_id)" >> "$DATA_FILES"
+
+    # Send email notification
+    send_email "nafeesayousaf2129@gmail.com" "New Task Added" "Task Name: $task_name\nDescription: $task_desc\nDue Date: $task_date\nPriority: $task_priority\nStatus: Not Started"
+
+    # Show success message
     echo -e "${LIGHT_GREEN}Task added successfully!${NO_COLOR}"
+
+    # Return to the main menu (assuming menu.sh exists)
+    bash ./menu.sh
 }
+
+# Clear the screen
+clear
 
 # Call the add_task function
 add_task

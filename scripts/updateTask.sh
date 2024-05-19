@@ -116,8 +116,10 @@ function update_task {
     fi
     echo -n "Press any key to return to the main menu..."
     read -n 1
+    bash  ./menu.sh
 }
 
+clear
 # Call the update_task function
 update_task
 

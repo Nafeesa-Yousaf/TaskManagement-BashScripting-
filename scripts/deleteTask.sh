@@ -49,8 +49,10 @@ function Delete_Task {
     fi
     echo -n "Press any key to return to the main menu..."
     read -n 1
+    bash ./menu.sh
 }
 
+clear
 # Call the Delete_Task function
 Delete_Task
 
