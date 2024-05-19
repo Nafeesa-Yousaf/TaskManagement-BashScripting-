@@ -85,7 +85,6 @@ function add_task {
     # Append the task to the file
     echo "$task_name,$task_desc,$task_date,$task_priority,Not Started,$(generate_id)" >> "$DATA_FILES"
     echo -e "${LIGHT_GREEN}Task added successfully!${NO_COLOR}"
-    fi
     sleep 1 
     bash  "$SCRIPT_PATH"menu.sh;
 }
