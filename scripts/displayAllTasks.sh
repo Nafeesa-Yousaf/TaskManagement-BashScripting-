@@ -30,7 +30,9 @@ function show_tasks {
     echo ""
     echo -n -e "Press any key to return to the main menu..."
     read -n 1
+    bash  ./menu.sh
 }
 
 # Call the function to show tasks
+clear
 show_tasks
