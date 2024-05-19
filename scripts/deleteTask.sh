@@ -46,7 +46,7 @@ Due Date: $task_date
 Priority: $task_priority
 Status: $task_status"
     # Send email notification
-    send_email "nafeesayousaf2129@gmail.com" "Task Id $task_id Deleted Sucessfully" "$multi_line_message"
+    #send_email "nafeesayousaf2129@gmail.com" "Task Id $task_id Deleted Sucessfully" "$multi_line_message"
                 echo -e "${LIGHT_GREEN}Task deleted successfully!${NO_COLOR}"
             else
                 echo "Task deletion cancelled."
