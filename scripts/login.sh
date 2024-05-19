@@ -1,6 +1,5 @@
 #!/bin/bash
 
-TASK_FILE=""
 # Function to validate login credentials
 function login {
     local username="$1"
@@ -12,7 +11,8 @@ function login {
         # Check if password matches for the given username
         if grep -q "^$username,.*,$password$" "$user_details_file"; then
             echo "Login successful. Welcome, $username!"
-            TASK_FILE="$HOME/Documents/OsProject/dataFiles/Tasks/"$username"_Tasks.txt"
+            export TASK_FILE="$HOME/Documents/OsProject/dataFiles/Tasks/"$username"_Tasks.txt"
+            bash menu.sh "$TASK_FILE"
         else
             echo "Incorrect password for username $username."
             read -p "Do you want to retry (r) or forget password (f) or exit (e)? " choice
@@ -59,3 +59,4 @@ while true; do
     login "$username" "$password" && break
 done
 
+bash ./createTask.sh

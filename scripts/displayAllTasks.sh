@@ -8,7 +8,7 @@ LIGHT_GREEN='\033[1;32m'
 BLUE='\033[0;34m'
 NO_COLOR='\033[0m'
 
-TASK_FILE="$HOME/Documents/OsProject/dataFiles/Tasks.txt"
+TASK_FILE="$1"
 
 # Function to show all tasks
 function show_tasks {
@@ -30,7 +30,7 @@ function show_tasks {
     echo ""
     echo -n -e "Press any key to return to the main menu..."
     read -n 1
-    bash  ./menu.sh
+    bash  ./menu.sh "$TASK_FILE"
 }
 
 # Call the function to show tasks

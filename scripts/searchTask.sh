@@ -7,7 +7,7 @@ BASE_DIR="./users"
 LIGHT_GREEN='\033[1;32m'
 NO_COLOR='\033[0m'
 
-TASK_FILE="$HOME/Documents/OsProject/dataFiles/Tasks.txt"
+TASK_FILE="$1"
 
 # Function to search for a task by name
 function search_task {
@@ -35,7 +35,7 @@ function search_task {
     fi
     echo -n "Press any key to return to the main menu..."
     read -n 1
-    bash  ./menu.sh
+    bash  ./menu.sh "$TASK_FILE"
 }
 
 clear
