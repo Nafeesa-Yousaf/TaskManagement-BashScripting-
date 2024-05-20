@@ -26,6 +26,7 @@ function is_email_exist {
 
 # Function to sign up a new user
 function signup {
+    clear
     local retry_choice=""
 
     while true; do
