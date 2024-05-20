@@ -14,6 +14,7 @@ GREY='\033[90m'
 NO_COLOR='\033[0m'
 
 TASK_FILE="$1"
+EMAIL="$2"
 
 # Function to validate date format (YYYY-MM-DD)
 function validate_date {
@@ -189,7 +190,7 @@ Due Date: $new_task_date
 Priority: $new_task_priority
 Status: $new_task_status"
     # Send email notification
-    #send_email "nafeesayousaf2129@gmail.com" "Task Id $task_id Updated Sucessfully" "$multi_line_message"
+    send_email "$EMAIL" "Task Id $task_id Updated Sucessfully" "$multi_line_message"
 
 
             echo -e "${LIGHT_GREEN}Task updated successfully!${NO_COLOR}"
@@ -200,7 +201,7 @@ Status: $new_task_status"
         fi
     echo -n -e "${BLUE}Press any key to return to the main menu...${NO_COLOR}"
     read -n 1
-    bash  ./menu.sh "$TASK_FILE"
+    bash  ./menu.sh "$TASK_FILE" "$EMAIL"
 }
 
 clear

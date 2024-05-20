@@ -16,6 +16,7 @@ NO_COLOR='\033[0m'
 # Path to the data file (use $HOME instead of ~ for proper expansion)
 # DATA_FILES="$HOME/Documents/OsProject/dataFiles/Tasks.txt"
 DATA_FILES="$1"
+EMAIL="$2"
 
 # Function to generate Id
 function generate_next_id {
@@ -157,7 +158,7 @@ Due Date: $task_date
 Priority: $task_priority
 Status: Not Started"
     # Send email notification
-    #send_email "nafeesayousaf2129@gmail.com" "New Task Added" "$multi_line_message"
+    send_email "$EMAIL" "New Task Added" "$multi_line_message"
 
     # Show success message
     echo -e "${LIGHT_GREEN}Task added successfully!${NO_COLOR}"
@@ -166,7 +167,7 @@ Status: Not Started"
 
 	read -n 1
     # Return to the main menu (assuming menu.sh exists)
-    bash ./menu.sh "$DATA_FILES"
+    bash ./menu.sh "$DATA_FILES" "$EMAIL"
 }
 
 # Clear the screen

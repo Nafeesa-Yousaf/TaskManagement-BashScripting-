@@ -13,7 +13,8 @@ CYAN='\033[36m'
 GREY='\033[90m'
 NO_COLOR='\033[0m'
 
-TASK_FILE= "$1"
+TASK_FILE="$1"
+EMAIL="$2"
 
 source ./sendMail.sh
 # Function to delete a task
@@ -66,7 +67,7 @@ Due Date: $task_date
 Priority: $task_priority
 Status: $task_status"
     # Send email notification
-    #send_email "nafeesayousaf2129@gmail.com" "Task Id $task_id Deleted Sucessfully" "$multi_line_message"
+    send_email "$EMAIL" "Task Id $task_id Deleted Sucessfully" "$multi_line_message"
                 echo -e "${LIGHT_GREEN}Task deleted successfully!${NO_COLOR}"
             else
                 echo -e "${RED}Task deletion cancelled.${NO_COLOR}"
@@ -80,7 +81,7 @@ Status: $task_status"
     echo ""
     echo -n -e "${BLUE}Press any key to return to the main menu...${NO_COLOR}"
     read -n 1
-    bash ./menu.sh "$TASK_FILE"
+    bash ./menu.sh "$TASK_FILE" "$EMAIL"
 }
 
 clear

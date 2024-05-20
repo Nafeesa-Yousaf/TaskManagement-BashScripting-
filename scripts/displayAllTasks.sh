@@ -14,6 +14,7 @@ GREY='\033[90m'
 NO_COLOR='\033[0m'
 
 TASK_FILE="$1"
+EMAIL="$2"
 
 # Function to show all tasks
 function show_tasks {
@@ -35,7 +36,7 @@ function show_tasks {
     echo ""
     echo -n -e "${BLUE}Press any key to return to the main menu...${NO_COLOR}"
     read -n 1
-    bash  ./menu.sh "$TASK_FILE"
+    bash  ./menu.sh "$TASK_FILE" "$EMAIL"
 }
 
 # Call the function to show tasks

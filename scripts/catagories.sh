@@ -8,7 +8,8 @@ LIGHT_YELLOW='\033[1;33m'
 NO_COLOR='\033[0m'
 
 
-TASK_FILE="$HOME/Documents/OsProject/dataFiles/Tasks.txt"
+TASK_FILE="$1"
+EMAIL="$2"
 today=$(date +%Y-%m-%d)
 
 # Function to display tasks in a column format
@@ -113,7 +114,7 @@ echo ""
     esac
     echo -n -e "${LIGHT_BLUE}Press any key to return to the main menu...${NO_COLOR}"
     read -n 1
-    bash  ./menu.sh
+    bash  ./menu.sh "$TASK_FILE" "$EMAIL"
 }
 
 # Call the categorize_tasks function

@@ -14,6 +14,7 @@ GREY='\033[90m'
 NO_COLOR='\033[0m'
 
 TASK_FILE="$1"
+EMAIL="$2"
 
 # Function to search for a task by name
 function search_task {
@@ -50,7 +51,7 @@ function search_task {
     echo ""
     echo -n -e "${BLUE}Press any key to return to the main menu...${NO_COLOR}"
     read -n 1
-    bash  ./menu.sh "$TASK_FILE"
+    bash  ./menu.sh "$TASK_FILE" "$EMAIL"
 }
 
 clear

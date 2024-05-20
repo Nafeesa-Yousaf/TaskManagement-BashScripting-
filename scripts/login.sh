@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TASK_FILE=""
+clear
 
 # Define Colors
 LIGHT_GREEN='\033[1;32m'
@@ -25,8 +25,10 @@ function login {
         if grep -q "^$username,.*,$password$" "$user_details_file"; then
             echo -e "${LIGHT_GREEN}Login successful. Welcome, $username!${NO_COLOR}"
             TASK_FILE="$HOME/Documents/OsProject/dataFiles/Tasks/"$username"_Tasks.txt"
+            email=$(grep "^$username,.*$" "$user_details_file" | cut -d',' -f2)
+            send_email "$email" "Login to Task Management " "Dear $username, You are login to Task Management"
             sleep 2
-            bash ./menu.sh
+            bash ./menu.sh "$TASK_FILE" "$email"
 
         else
             echo "Incorrect password for username $username."
@@ -66,6 +68,7 @@ function retrieve_password {
     fi
 }
 
+clear
 # Prompt user for username and password
 echo "    ---------------------------------------"
     echo -e "${LIGHT_GREEN}           Task Management System          ${NO_COLOR}"
@@ -84,4 +87,4 @@ while true; do
     echo ""
 done
 
-bash ./createTask.sh
+
