@@ -12,6 +12,7 @@ CYAN='\033[36m'
 GREY='\033[90m'
 NO_COLOR='\033[0m'
 
+
 # Function to validate login credentials
 function login {
     local username="$1"
@@ -26,6 +27,7 @@ function login {
             TASK_FILE="$HOME/Documents/OsProject/dataFiles/Tasks/"$username"_Tasks.txt"
             sleep 2
             bash ./menu.sh
+
         else
             echo "Incorrect password for username $username."
             read -p "Do you want to retry (r) or forget password (f) or exit (e)? " choice
@@ -82,3 +84,4 @@ while true; do
     echo ""
 done
 
+bash ./createTask.sh

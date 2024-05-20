@@ -14,7 +14,8 @@ GREY='\033[90m'
 NO_COLOR='\033[0m'
 
 # Path to the data file (use $HOME instead of ~ for proper expansion)
-DATA_FILES="$HOME/Documents/OsProject/dataFiles/Tasks.txt"
+# DATA_FILES="$HOME/Documents/OsProject/dataFiles/Tasks.txt"
+DATA_FILES="$1"
 
 # Function to generate Id
 function generate_next_id {
@@ -162,9 +163,10 @@ Status: Not Started"
     echo -e "${LIGHT_GREEN}Task added successfully!${NO_COLOR}"
     echo ""
 	echo -e "${BLUE}Enter any Key to Continue...${NO_COLOR}"
+
 	read -n 1
     # Return to the main menu (assuming menu.sh exists)
-    bash ./menu.sh
+    bash ./menu.sh "$DATA_FILES"
 }
 
 # Clear the screen

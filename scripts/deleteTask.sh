@@ -13,7 +13,8 @@ CYAN='\033[36m'
 GREY='\033[90m'
 NO_COLOR='\033[0m'
 
-TASK_FILE="$HOME/Documents/OsProject/dataFiles/Tasks.txt"
+TASK_FILE= "$1"
+
 source ./sendMail.sh
 # Function to delete a task
 function Delete_Task {
@@ -79,7 +80,7 @@ Status: $task_status"
     echo ""
     echo -n -e "${BLUE}Press any key to return to the main menu...${NO_COLOR}"
     read -n 1
-    bash ./menu.sh
+    bash ./menu.sh "$TASK_FILE"
 }
 
 clear
