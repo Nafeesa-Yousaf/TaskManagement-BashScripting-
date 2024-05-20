@@ -6,7 +6,7 @@ NO_COLOR='\033[0m'
 BLUE='\033[0;34m'
 
 SCRIPT_PATH='./';
-
+TASK_FILE="$1"
 function logout {
     echo ""
     echo -n -e "${BLUE}Are you sure you want to logout? (y/n): ${NO_COLOR}"
@@ -37,12 +37,12 @@ function main_menu {
     echo -n "Choose an option: "
     read choice
     case $choice in
-        1) bash  "$SCRIPT_PATH"createTask.sh;;
-        2) bash  "$SCRIPT_PATH"displayAllTasks.sh;;
-        3) bash  "$SCRIPT_PATH"updateTask.sh;;
-        4) bash  "$SCRIPT_PATH"deleteTask.sh;;
-        5) bash  "$SCRIPT_PATH"searchTask.sh;;
-        6) bash  "$SCRIPT_PATH"catagories.sh;;
+        1) bash  "$SCRIPT_PATH"createTask.sh "$TASK_FILE";;
+        2) bash  "$SCRIPT_PATH"displayAllTasks.sh "$TASK_FILE" ;;
+        3) bash  "$SCRIPT_PATH"updateTask.sh "$TASK_FILE" ;;
+        4) bash  "$SCRIPT_PATH"deleteTask.sh "$TASK_FILE" ;;
+        5) bash  "$SCRIPT_PATH"searchTask.sh "$TASK_FILE" ;;
+        6) bash  "$SCRIPT_PATH"catagories.sh "$TASK_FILE" ;;
         7) logout ;;
         *) echo "Invalid option. Try again."; main_menu ;;
     esac

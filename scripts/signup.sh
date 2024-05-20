@@ -96,11 +96,14 @@ function signup {
 
         # Create a tasks file for the user
         touch "$HOME/Documents/OsProject/dataFiles/Tasks/"$username"_Tasks.txt"
+        USER_TASKS="$HOME/Documents/OsProject/dataFiles/Tasks/"$username"_Tasks.txt"
 	#Multi Line Email Message
     multi_line_message="
 Your Account is Created Successfully"
     # Send email notification
     #send_email "$email" "Account Created Sucessfully" "$multi_line_message"
+  
+    	echo "$email,$USER_TASKS" >> "$HOME/Documents/OsProject/dataFiles/UserCredentials/userTaskDetails.txt"
         echo -e "${LIGHT_GREEN}User signed up successfully.${NO_COLOR}"
         echo ""
         echo -e "${BLUE}Press Any key to Continue:${NO_COLOR} "
