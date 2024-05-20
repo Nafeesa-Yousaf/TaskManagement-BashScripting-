@@ -38,11 +38,11 @@ function login {
     else
         echo -e "${RED}Username $username does not exist.${NO_COLOR}"
         echo ""
-        echo -e "${BLUE}Do you want to retry (r) or exit (e)?${NO_COLOR} " 
+        echo -e "${BLUE}Retry (r) or Signup (s)?${NO_COLOR} " 
         read choice
         case $choice in
             r|R) return 1 ;; # Retry login
-            *) echo "Exiting..." && exit ;; # Exit program
+            s|S) echo "Exiting..." && bash ./signup.sh ;; # Exit program
         esac
     fi
 }
