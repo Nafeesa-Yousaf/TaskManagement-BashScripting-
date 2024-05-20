@@ -29,4 +29,4 @@ echo -e "$N2"
 echo -e "$N3"
 echo -e "$N4"
 sleep 3 
-bash  "$SCRIPT_PATH"menu.sh;
+bash  "$SCRIPT_PATH"login.sh;
