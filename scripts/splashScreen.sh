@@ -14,6 +14,7 @@ ITALIC='\033[3m'
 NC='\033[0m' # No Color
 
 # Project title and group member names
+clear
 TITLE="\n\n${BOLD}${BOLD}${ITALIC}${GREEN}                 ------      ------   TASK MANAGEMENT SYSTEM   ------      ------${NC}\n\n"
 NAME="${BOLD}${UNDERLINE}${MAGENTA}                          **********    Group Members    **********${NC}\n\n"
 N1="${BOLD}${BLUE}                            ** NAFEESA YOUSAF   **          FL-21503 ${NC}\n"

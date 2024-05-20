@@ -67,6 +67,7 @@ function retrieve_password {
 }
 
 # Prompt user for username and password
+clear
 echo "    ---------------------------------------"
     echo -e "${LIGHT_GREEN}           Task Management System          ${NO_COLOR}"
     echo "    ---------------------------------------"

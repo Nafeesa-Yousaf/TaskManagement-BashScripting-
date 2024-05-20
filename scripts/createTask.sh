@@ -14,7 +14,6 @@ GREY='\033[90m'
 NO_COLOR='\033[0m'
 
 # Path to the data file (use $HOME instead of ~ for proper expansion)
-# DATA_FILES="$HOME/Documents/OsProject/dataFiles/Tasks.txt"
 DATA_FILES="$1"
 
 # Function to generate Id
@@ -44,7 +43,7 @@ function validate_date {
     day=$(echo $1 | cut -d'-' -f3)
 
     # Validate month (should be between 01 and 12)
-    if (( $month < 1 || $month > 12 )); then
+    if (( month < 1 || month > 12 )); then
         echo -e "${RED}Invalid month. Month must be between 01 and 12.${NO_COLOR}"
         return 1
     fi
@@ -55,7 +54,7 @@ function validate_date {
         04|06|09|11) max_days=30 ;;
         02) 
             # Check for leap year
-            if (( ($year % 4 == 0 && $year % 100 != 0) || ($year % 400 == 0) )); then
+            if (( (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0) )); then
                 max_days=29
             else
                 max_days=28
@@ -64,7 +63,7 @@ function validate_date {
     esac
 
     # Check if the day is within the valid range
-    if (( $day < 1 || $day > $max_days )); then
+    if (( day < 1 || day > max_days )); then
         echo -e "${RED}Invalid day for the given month. Day must be between 01 and $max_days.${NO_COLOR}"
         return 1
     fi
@@ -78,7 +77,6 @@ function validate_date {
     # Date is valid
     return 0
 }
-
 
 # Function to validate priority
 function validate_priority {
@@ -98,7 +96,7 @@ function add_task {
     echo -e "     ${LIGHT_GREEN}             Create Tasks              ${NO_COLOR}"
     echo -e "${GREY}     ---------------------------------------${NO_COLOR}"
     echo ""
-    echo -n -e "${YELLOW}Enter task namcde:${NO_COLOR} "
+    echo -n -e "${YELLOW}Enter task name:${NO_COLOR} "
     read task_name
     echo ""
 
@@ -117,7 +115,7 @@ function add_task {
         echo -n -e "${YELLOW}Enter Due Date (YYYY-MM-DD):${NO_COLOR} "
         read task_date
         if validate_date "$task_date"; then
-        echo ""
+            echo ""
             break
         else
             echo ""
@@ -145,12 +143,15 @@ function add_task {
         LOW) task_priority="Low" ;;
     esac
 
+    # Generate the next ID
+    next_id=$(generate_next_id)
+
     # Append the task to the file
-    echo "$task_name,$task_desc,$task_date,$task_priority,Not Started,$(generate_next_id)" >> "$DATA_FILES"
-	
-    #Multi Line Email Message
+    echo "$task_name,$task_desc,$task_date,$task_priority,Not Started,$next_id" >> "$DATA_FILES"
+    
+    # Multi Line Email Message
     multi_line_message="
-New Task Added with ID $(generate_next_id). Task Details are:
+New Task Added with ID $next_id. Task Details are:
 Task Name: $task_name
 Description: $task_desc
 Due Date: $task_date
@@ -162,9 +163,9 @@ Status: Not Started"
     # Show success message
     echo -e "${LIGHT_GREEN}Task added successfully!${NO_COLOR}"
     echo ""
-	echo -e "${BLUE}Enter any Key to Continue...${NO_COLOR}"
+    echo -e "${BLUE}Enter any Key to Continue...${NO_COLOR}"
 
-	read -n 1
+    read -n 1
     # Return to the main menu (assuming menu.sh exists)
     bash ./menu.sh "$DATA_FILES"
 }
@@ -174,4 +175,3 @@ clear
 
 # Call the add_task function
 add_task
-

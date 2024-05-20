@@ -30,7 +30,7 @@ function show_tasks {
         # Use awk to print the task data
         awk -F, '{printf "%-10s | %-20s | %-30s | %-10s | %-10s | %-10s\n", $6, $1, $2, $3, $4, $5}' $TASK_FILE
     else
-        echo "No tasks added."
+        echo "No tasks Here."
     fi
     echo ""
     echo -n -e "${BLUE}Press any key to return to the main menu...${NO_COLOR}"
