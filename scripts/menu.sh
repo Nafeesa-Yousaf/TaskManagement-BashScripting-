@@ -15,7 +15,7 @@ function logout {
     if [[ $confirm == [yY] ]]; then
         echo "Logging out..."
         clear
-        bash  "$SCRIPT_PATH"login.sh     
+        exit 0
     else
         main_menu
     fi

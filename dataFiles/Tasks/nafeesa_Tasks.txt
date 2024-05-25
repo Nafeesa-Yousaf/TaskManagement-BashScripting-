@@ -1,3 +1,7 @@
-quiz,qwert,2024-05-20,Low,in progress,2
-ghij,wert,2024-05-22,High,Not Started,3
+quiz,Quiz of stats,2024-05-20,Low,Done,2
+Assignment,wert,2024-05-22,High,In progress,3
 hehehe,hehehe,2024-05-22,Medium,Not Started,4
+Project,Os project using bash scripting,2024-05-21,High,Not Started,6
+abcd,abcd,2024-05-22,High,Not Started,7
+ertyui,yuion,2024-11-22,High,Not Started,8
+rt,er,2024-07-22,high,in progress,9

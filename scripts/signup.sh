@@ -30,7 +30,7 @@ function signup {
 
     while true; do
         # Validate and prompt for username
-        while true; do
+        
         echo "    ---------------------------------------"
         echo -e "${LIGHT_GREEN}           Task Management System          ${NO_COLOR}"
         echo "    ---------------------------------------"
@@ -39,6 +39,7 @@ function signup {
     echo -e "${LIGHT_GREEN}        Welcome to the Signup system!             ${NO_COLOR}"
     echo -e "${GREY}     ---------------------------------------${NO_COLOR}"
     echo ""
+    while true; do
             echo -n "Enter username (no spaces allowed): "
             read username
             if [[ -z "$username" || "$username" == *" "* ]]; then
@@ -101,17 +102,18 @@ function signup {
     multi_line_message="
 Your Account is Created Successfully"
     # Send email notification
-    #send_email "$email" "Account Created Sucessfully" "$multi_line_message"
+    send_email "$email" "Account Created Sucessfully" "$multi_line_message"
   
     	echo "$email,$USER_TASKS" >> "$HOME/Documents/OsProject/dataFiles/UserCredentials/userTaskDetails.txt"
         echo -e "${LIGHT_GREEN}User signed up successfully.${NO_COLOR}"
         echo ""
         echo -e "${BLUE}Press Any key to Continue:${NO_COLOR} "
-        read -n 
+        read -n 1
         bash ./login.sh
     done
 }
-
+clear
 # Call the signup function
 signup
 
+correct it

@@ -99,15 +99,18 @@ function add_task {
     echo -e "     ${LIGHT_GREEN}             Create Tasks              ${NO_COLOR}"
     echo -e "${GREY}     ---------------------------------------${NO_COLOR}"
     echo ""
-    echo -n -e "${YELLOW}Enter task namcde:${NO_COLOR} "
+
+    while true; do
+    echo -n -e "${YELLOW}Enter task name:${NO_COLOR} "
     read task_name
     echo ""
-
     # Check if the task name is empty
     if [ -z "$task_name" ]; then
         echo -e "${RED}Task name cannot be empty. Task not added.${NO_COLOR}"
-        return
+    else
+     break
     fi
+    done
 
     echo -n -e "${YELLOW}Enter task description:${NO_COLOR} "
     read task_desc
